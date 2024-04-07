@@ -9,6 +9,15 @@ const session = require('express-session');
 
 const app = express();
 
+// configure passport provider options
+passport.use(new GoogleStrategy({
+  clientID: '',
+  clientSecret: '',
+  callbackURL: ''
+}, (accessToken, refreshToken, profile, done) => {
+done(null, profile);
+}))
+
 app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
 app.set('view engine', '.hbs');
 
