@@ -15,7 +15,8 @@ passport.use(new GoogleStrategy({
   clientSecret: '',
   callbackURL: ''
 }, (accessToken, refreshToken, profile, done) => {
-done(null, profile);
+  console.log(profile)
+  done(null, profile);
 }))
 
 // serialize user when saving to session
