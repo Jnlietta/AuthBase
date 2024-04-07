@@ -11,9 +11,9 @@ const app = express();
 
 // configure passport provider options
 passport.use(new GoogleStrategy({
-  clientID: '',
-  clientSecret: '',
-  callbackURL: ''
+  clientID: process.env.clientID,
+  clientSecret: process.env.clientSecret,
+  callbackURL: process.env.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
   console.log(profile)
   done(null, profile);
