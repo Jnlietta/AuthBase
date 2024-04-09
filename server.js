@@ -5,6 +5,7 @@ const hbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
 const passportSetup = require('./config/passport');
+const isLogged = require('./middleware/isLogged');
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 
 app.set('view engine', '.hbs');
 
 // init session mechanism
-app.use(session({ secret: 'anything' }));
+app.use(session({ secret: 'marchewka' }));
 
 // init passport
 app.use(passport.initialize());
@@ -24,7 +25,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public')));
+app.use('/user', isLogged);
 
+// routes
 app.get('/', (req, res) => {
   res.render('index');
 });
